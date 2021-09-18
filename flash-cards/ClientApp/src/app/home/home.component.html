@@ -1,0 +1,31 @@
+<h1>FlashCards</h1>
+
+<div class="deck">
+  <div
+    class="card"
+    (click)="showCard = true"
+    [ngStyle]="{ cursor: showCard ? 'default' : 'pointer' }"
+  >
+    <h4 class="card-title" [ngClass]="{ invisivel: !showCard }">
+      {{ this.currentQuestion.pergunta }}
+    </h4>
+    <ul class="listItem" [ngClass]="{ invisivel: !showCard }">
+      <li
+        *ngFor="let opcao of this.currentQuestion.opcoes"
+        (click)="showConsole(opcao)"
+      >
+        {{ opcao.nome }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="this.acertou" class="container win-dialog">
+  <section>
+    <div>
+      <i class="win-icon fa fa-check-circle-o"></i>
+      <h1 class="win-banner">Você venceu!</h1>
+      <span class="win-button" (click)="nextWord()"> Nova Palavra </span>
+    </div>
+  </section>
+</div>
