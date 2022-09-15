@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onSubmitted: (_) => convert(),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp('[01]')),
-                LengthLimitingTextInputFormatter(16),
+                // LengthLimitingTextInputFormatter(16),
               ],
             ),
             const SizedBox(height: 10),
