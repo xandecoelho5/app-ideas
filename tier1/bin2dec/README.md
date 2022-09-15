@@ -1,16 +1,34 @@
-# bin2dec
+# Bin2Dec
 
-A new Flutter project.
+**Tier:** 1-Beginner
 
-## Getting Started
+Binary is the number system all digital computers are based on.
+Therefore it's important for developers to understand binary, or base 2,
+mathematics. The purpose of Bin2Dec is to provide practice and
+understanding of how binary calculations.
 
-This project is a starting point for a Flutter application.
+Bin2Dec allows the user to enter strings of up to 8 binary digits, 0's
+and 1's, in any sequence and then displays its decimal equivalent.
 
-A few resources to get you started if this is your first Flutter project:
+This challenge requires that the developer implementing it follow these
+constraints:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+-   Arrays may not be used to contain the binary digits entered by the user
+-   Determining the decimal equivalent of a particular binary digit in the
+    sequence must be calculated using a single mathematical function, for
+    example the natural logarithm. It's up to you to figure out which function
+    to use.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## User Stories
+
+-   [x] User can enter up to 8 binary digits in one input field
+-   [x] User must be notified if anything other than a 0 or 1 was entered
+-   [x] User views the results in a single output field containing the decimal (base 10) equivalent of the binary number that was entered
+
+## Bonus features
+
+-   [x] User can enter a variable number of binary digits
+
+## Useful links and resources
+
+[Binary number system](https://en.wikipedia.org/wiki/Binary_number)
