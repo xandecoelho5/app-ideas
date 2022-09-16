@@ -27,7 +27,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final converter = Converter(0);
+  final converter = Converter();
   final controller = TextEditingController();
 
   void convert() {
