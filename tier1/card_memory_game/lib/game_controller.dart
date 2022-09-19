@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 class GameController extends ValueNotifier<List<CardModel>> {
   List<IconData> icons = [];
   List<CardModel> chosenCards = [];
+  List<Function> onGameEndListeners = [];
   late Level level;
 
   final random = Random();
@@ -16,9 +17,10 @@ class GameController extends ValueNotifier<List<CardModel>> {
   bool _canPress = true;
 
   Function(Timer)? onTickTimer;
-  Function()? onGameEnd;
 
   GameController() : super([]);
+
+  int get ticks => timer!.tick ~/ 10;
 
   void generateCards(int count) {
     icons = baseIcons.take(count).toList();
@@ -36,11 +38,10 @@ class GameController extends ValueNotifier<List<CardModel>> {
 
   void startGame() {
     if (timer == null || !timer!.isActive) {
+      _canPress = true;
       generateCards(level.columns * level.columns);
-      timer = Timer.periodic(const Duration(seconds: 1), (val) {
-        if (onTickTimer != null) {
-          onTickTimer!(val);
-        }
+      timer = Timer.periodic(const Duration(milliseconds: 100), (val) {
+        _verifyWin();
       });
     }
   }
@@ -80,11 +81,21 @@ class GameController extends ValueNotifier<List<CardModel>> {
   }
 
   void _verifyWin() {
-    if (value.every((card) => card.visible)) {
+    final bool allVisible = value.every((element) => element.visible);
+    if (allVisible || !allVisible && timer!.tick >= (level.timeLimit ~/ 100)) {
+      _canPress = false;
       timer?.cancel();
-      if (onGameEnd != null) {
-        onGameEnd!();
-      }
+      _executeOnGameEndListeners(allVisible);
+    }
+  }
+
+  void addOnGameEndListener(Function(bool) listener) {
+    onGameEndListeners.add(listener);
+  }
+
+  void _executeOnGameEndListeners(bool won) {
+    for (var element in onGameEndListeners) {
+      element(won);
     }
   }
 }
